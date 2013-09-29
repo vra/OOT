@@ -74,7 +74,7 @@ int main()
 	string keep;
 
 
-	cout<<"请依次输入第一个操作数、第二个操作数、运算符,用空格分隔："<<endl;
+	cout<<"请依次输入第一个操作数、第二个操作数和运算符,用空格分隔："<<endl;
 	do
 	{
 		cin>>strElement1>>strElement2>>strTheOperator;
@@ -93,18 +93,18 @@ int main()
 			isInputError=true;
 			if (errorNum==Below_zero)
 			{
-				cout<<"Below_Zero_Error：输入参数小于零"<<endl;
+				cout<<"Below_Zero_Error：输入参数小于零.请重新输入"<<endl;
 			}
 			else  if(errorNum==Bad_operator)
 			{
-				cout<<"Bad_Operator_Error:输入运算符错误"<<endl;
+				cout<<"Bad_Operator_Error:输入运算符错误.请重新输入"<<endl;
 			}
 			else if(errorNum==Bad_num)
 			{
-				 cout<<"Bad_Num_Error:除数或被求模数不能为0"<<endl;
+				 cout<<"Bad_Num_Error:除数或被求模数不能为0.请重新输入"<<endl;
 			}
 
-			cin>>keep;
+			continue;
 		}
 
 		if (strTheOperator=="%" && (IsNotInt(strElement1) || IsNotInt(strElement2)))
