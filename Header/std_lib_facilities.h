@@ -1,4 +1,4 @@
-/*
+ï»¿/*
 	simple "Programming: Principles and Practice using C++" course header to
 	be used for the first few weeks.
 	It provides the most common standard headers (in the global namespace)
@@ -198,7 +198,7 @@ inline void keep_window_open(string s)
 
 
 // error function to be used (only) until error() is introduced in Chapter 5:
-inline void simple_error(string s)	// write ``error: s’’ and exit program
+inline void simple_error(string s)	// write ``error: sæ‹» and exit program
 {
 	cerr << "error: " << s << '\n';
 	keep_window_open();		// for some Windows environments

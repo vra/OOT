@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include "std_lib_facilities.h"
 #define Below_zero		0
 #define Bad_operator	1
@@ -6,7 +6,7 @@
 using namespace std;
 
 
-//½«×Ö·û´®×ª»¯ÎªÊıÖµÀàĞÍ
+//å°†å­—ç¬¦ä¸²è½¬åŒ–ä¸ºæ•°å€¼ç±»å‹
 double StrToNum(string s)
 {
 	double num;
@@ -15,7 +15,7 @@ double StrToNum(string s)
 	return num;
 }
 
-//½«ÊıÖµÀàĞÍ×ª»¯Îª×Ö·û´®ÀàĞÍ
+//å°†æ•°å€¼ç±»å‹è½¬åŒ–ä¸ºå­—ç¬¦ä¸²ç±»å‹
 string NumToStr(double i)
 {
 	string s;
@@ -33,14 +33,14 @@ bool IsNotInt(string input)
 	else
 		return false;
 }
-//¼ì²éÊÇ·ñĞ¡ÓÚÁã 
+//æ£€æŸ¥æ˜¯å¦å°äºé›¶ 
 void IsBelowZero(string data1,string data2)
 {
 	if (data1[0]=='-' || data2[0]=='-')
 			throw Below_zero;
 }
 
-//¼ì²éÔËËã·û
+//æ£€æŸ¥è¿ç®—ç¬¦
 void IsRightOperator(string operators)
 {
 	if ((operators=="+") || (operators=="-") ||(operators=="*") ||(operators=="/") ||(operators=="%" ))
@@ -52,7 +52,7 @@ void IsRightOperator(string operators)
 	}
 }
 
-//¼ì²é³ıÊıÊÇ·ñÎªÁã
+//æ£€æŸ¥é™¤æ•°æ˜¯å¦ä¸ºé›¶
 void IsDividedByZero(string operators,string data2)
 {
 	if(operators=="/" || operators=="%")
@@ -74,12 +74,12 @@ int main()
 	string keep;
 
 
-	cout<<"ÇëÒÀ´ÎÊäÈëµÚÒ»¸ö²Ù×÷Êı¡¢µÚ¶ş¸ö²Ù×÷Êı¡¢ÔËËã·û,ÓÃ¿Õ¸ñ·Ö¸ô£º"<<endl;
+	cout<<"è¯·ä¾æ¬¡è¾“å…¥ç¬¬ä¸€ä¸ªæ“ä½œæ•°ã€ç¬¬äºŒä¸ªæ“ä½œæ•°ã€è¿ç®—ç¬¦,ç”¨ç©ºæ ¼åˆ†éš”ï¼š"<<endl;
 	do
 	{
 		cin>>strElement1>>strElement2>>strTheOperator;
 
-		//´íÎó¼ì²é
+		//é”™è¯¯æ£€æŸ¥
 		try
 		{
 			
@@ -92,15 +92,15 @@ int main()
 		{
 			if (errorNum==Below_zero)
 			{
-				cout<<"Below_Zero_Error£ºÊäÈë²ÎÊıĞ¡ÓÚÁã"<<endl;
+				cout<<"Below_Zero_Errorï¼šè¾“å…¥å‚æ•°å°äºé›¶"<<endl;
 			}
 			else  if(errorNum==Bad_operator)
 			{
-				cout<<"Bad_Operator_Error:ÊäÈëÔËËã·û´íÎó"<<endl;
+				cout<<"Bad_Operator_Error:è¾“å…¥è¿ç®—ç¬¦é”™è¯¯"<<endl;
 			}
 			else if(errorNum==Bad_num)
 			{
-				 cout<<"Bad_Num_Error:³ıÊı»ò±»ÇóÄ£Êı²»ÄÜÎª0"<<endl;
+				 cout<<"Bad_Num_Error:é™¤æ•°æˆ–è¢«æ±‚æ¨¡æ•°ä¸èƒ½ä¸º0"<<endl;
 			}
 
 			cin>>keep;
@@ -109,13 +109,13 @@ int main()
 		if (strTheOperator=="%" && (IsNotInt(strElement1) || IsNotInt(strElement2)))
 		{
 			isInputError=true;
-			cout<<"ERROR£ºÄ£ÔËËã²Ù×÷Êı±ØĞëÊÇÕûÊı.ÇëÖØĞÂÊäÈë£º"<<endl;
+			cout<<"ERRORï¼šæ¨¡è¿ç®—æ“ä½œæ•°å¿…é¡»æ˜¯æ•´æ•°.è¯·é‡æ–°è¾“å…¥ï¼š"<<endl;
 		}
 		else
 			isInputError=false;
 	}while (isInputError);
 
-	//½«×Ö·ûĞÍ¸³Öµ¸øÊıÖµĞÍ
+	//å°†å­—ç¬¦å‹èµ‹å€¼ç»™æ•°å€¼å‹
 	element1=StrToNum(strElement1);
 	element2=StrToNum(strElement2);
 	theOperator=strTheOperator[0];
@@ -124,30 +124,30 @@ int main()
 	{
 		case '+':
 			result=element1+element2;
-			outputOperator="ºÍ";
+			outputOperator="å’Œ";
 			break;
 		case '-':
 			result=element1-element2;
-			outputOperator="²î";
+			outputOperator="å·®";
 			break;
 		case '*':
 			result=element1*element2;
-			outputOperator="»ı";
+			outputOperator="ç§¯";
 			break;
 		case '/':
 			result=element1/element2;
-			outputOperator="ÉÌ";
+			outputOperator="å•†";
 			break;
 		case '%':
 			result=((int)element1)%((int)element2);
-			outputOperator="ÇóÄ£";
+			outputOperator="æ±‚æ¨¡";
 			break;
 	default:
 			break;
 	}
 
-	//Êä³öÔËËã½á¹û
-	cout<<element1<<"Óë"<<element2<<"µÄ"<<outputOperator<<"µÈÓÚ"<<result;
+	//è¾“å‡ºè¿ç®—ç»“æœ
+	cout<<element1<<"ä¸"<<element2<<"çš„"<<outputOperator<<"ç­‰äº"<<result;
 
 	cin>>keep;
 	return  0;
