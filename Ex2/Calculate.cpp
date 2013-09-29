@@ -90,6 +90,7 @@ int main()
 		}
 		catch(int  errorNum)
 		{
+			isInputError=true;
 			if (errorNum==Below_zero)
 			{
 				cout<<"Below_Zero_Error：输入参数小于零"<<endl;
