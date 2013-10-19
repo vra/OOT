@@ -1,6 +1,5 @@
 ﻿//问题：1 Date函数
-#include <iostream>
-#include <time.h>
+
 #include "std_lib_facilities.h"
 #define MaxSizeOfNameSpace 1000
 
