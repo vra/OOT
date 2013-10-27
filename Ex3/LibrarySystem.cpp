@@ -1,9 +1,10 @@
-Ôªø//ÈóÆÈ¢òÔºö1 DateÂáΩÊï∞
-
+//Œ Ã‚£∫1 Date∫Ø ˝
+#include <iostream>
+#include <time.h>
 #include "std_lib_facilities.h"
 #define MaxSizeOfNameSpace 1000
 
-//Êó•ÊúüÁ±ª
+//»’∆⁄¿‡
 class  Date
 {
 public:
@@ -16,7 +17,7 @@ public:
 
 	Date()
 	{
-		time_t now=time(0);//Ê≥®ÊÑè‰∏ÄÂÆöË¶ÅÂàùÂßãÂåñ
+		time_t now=time(0);//◊¢“‚“ª∂®“™≥ı ºªØ
 		tm *tm1=localtime(&now) ;
 
 		day=tm1->tm_mday;
@@ -47,10 +48,10 @@ public:
 	OwedName()
 	{
 	}
-	//ÊòæÁ§∫Ê¨†Ë¥πÂ≠¶ÁîüÂêçÂ≠ó
+	//œ‘ æ«∑∑——ß…˙√˚◊÷
 	void DisplayInfo()
 	{
-		cout<<"ÂßìÂêçÔºö\t"<<name<<endl;
+		cout<<"–’√˚£∫\t"<<name<<endl;
 	}
 };
 
@@ -65,19 +66,19 @@ private:
 
 public:
 
-	//ÊòæÁ§∫‰ø°ÊÅØ
+	//œ‘ æ–≈œ¢
 	void DisplayInfo()
 	{
-		cout<<"Âõæ‰π¶‰ø°ÊÅØ------------------------------"<<endl;
-		cout<<"ISBNÂè∑Ôºö\t"<<ISBNNum<<endl;
-		cout<<"‰π¶ÂêçÔºö\t\t"<<name<<endl;
-		cout<<"‰ΩúËÄÖÔºö\t\t"<<author<<endl;
-		cout<<"Âá∫ÁâàÊó•ÊúüÔºö\t"<<pblsDate<<endl;
-		cout<<"ÊòØÂê¶ÂÄüÂá∫Ôºö\t";
+		cout<<"Õº È–≈œ¢------------------------------"<<endl;
+		cout<<"ISBN∫≈£∫\t"<<ISBNNum<<endl;
+		cout<<" È√˚£∫\t\t"<<name<<endl;
+		cout<<"◊˜’ﬂ£∫\t\t"<<author<<endl;
+		cout<<"≥ˆ∞Ê»’∆⁄£∫\t"<<pblsDate<<endl;
+		cout<<" «∑ÒΩË≥ˆ£∫\t";
 		if(isOut)
-			cout<<"Â∑≤ÂÄüÂá∫"<<endl;
+			cout<<"“—ΩË≥ˆ"<<endl;
 		else
-			cout<<"Êú™ÂÄüÂá∫"<<endl;
+			cout<<"Œ¥ΩË≥ˆ"<<endl;
 		cout<<endl;
 	}
 	string GetISBNNum()
@@ -112,27 +113,155 @@ public:
 	Book()
 	{
 	}
+	bool DateFormat1(string & date)//20130908
+	{
+		bool allIsNum=true;
+		//1.ºÏ≤È»´ « ˝◊÷
+		for(int i=0;i<8;i++)
+			if(date[i]>'9' ||date[i]<'0')
+				allIsNum=false;
+		if(!allIsNum)
+		{
+			cout<<"»’∆⁄∏Ò Ω”–¥ÌŒÛ"<<endl;
+			return false;
+		}
 
+		//2.ºÏ≤È»’∆⁄∏Ò Ω
+		char year0=date[0];
+		char year1=date[1];
+		char year2=date[2];
+		char year3=date[3];
+		int year=(year0-48)*1000+(year1-48)*100+(year2-48)*10+(year3-48);
+
+		char month0=date[4];
+		char month1=date[5];
+		int month=((int)month0-48)*10+((int)month1-48);
+		
+		char day0=date[6];
+		char day1=date[7];
+		int day=((int)day0-48)*10+((int)day1-48);
+
+		switch(month)
+		{
+		case 0:
+			return false;
+			break;
+		case 1:case 3:case 5:case 7:case8 :case 10:case 12:
+			if(day>31 || day<1)
+				return false;
+			else 
+				return true;
+			break;
+		case 4:case 6:case 9:case 11:
+			if(day>30 || day<1)
+				return false;
+			else 
+				return true;
+			break;
+		case 2:
+			if(year%4!=0 ||(year%4==0 && year%400!=0))
+			{
+				if(day>28 || day<1)
+					return false;
+				else 
+					return true;
+			}
+			else
+			{
+				if(day>29 || day<1)
+					return false;
+				else 
+					return true;
+			}
+			break;
+		default:
+			return false;
+			break;
+
+		}
+
+			
+	}
+	bool DateFormat2(string date)
+	{
+		return true;
+	}
 	Book(string theISBNNum,string theName,string theAuthor,string theDate)
 	{
-		//ËæìÂÖ•Ê£ÄÊü•
-		if((int)theISBNNum[0]<48 || (int)theISBNNum[0]>57
-			|| (int)theISBNNum[1]<48 || (int)theISBNNum[1]>57 
-			||(int)theISBNNum[2]<48 || (int)theISBNNum[2]>57 
-			||(((int)theISBNNum[3]<48 || (int)theISBNNum[3]>57)
-				&&((char)theISBNNum[3]>'z'||(char)theISBNNum[3]<'a')
-				&&((char)theISBNNum[3]>'Z'||(char)theISBNNum[3]<'A')))
+		//ISNB∏Ò ΩºÏ≤È
+		if(theISBNNum.length()<6)
 		{
-			cout<<"ISBNÁ†ÅËæìÂÖ•ÊúâËØØ"<<endl;
+			cout<<"ISBN¬Î ‰»Î∏Ò Ω”–ŒÛ"<<endl;
 			return;
 		}
-			
+		if((int)theISBNNum[0]<'0' || (int)theISBNNum[0]>'9'
+			|| (int)theISBNNum[2]<'0' || (int)theISBNNum[2]>'9'
+			||(int)theISBNNum[4]<'0' || (int)theISBNNum[4]>'9'
+			||(((int)theISBNNum[6]<'0' || (int)theISBNNum[6]>'9')
+				&&((char)theISBNNum[6]>'z'||(char)theISBNNum[6]<'a')
+				&&((char)theISBNNum[6]>'Z'||(char)theISBNNum[6]<'A')))
+		{
+			cout<<"ISBN¬Î ‰»Î∏Ò Ω”–ŒÛ"<<endl;
+			return;
+		}
+		
+		//»’∆⁄ºÏ≤È
+		if(theDate.length()<8)
+		{
+			cout<<"»’∆⁄ ‰»Î∏Ò Ω”–ŒÛ"<<endl;
+			return;
+		}
+		if(theDate.length()==8)
+		{
+			if(DateFormat1(theDate)) 
+			{
+				char month0=theDate[4];
+				char month1=theDate[5];
+				int month=((int)month0-48)*10+((int)month1-48);
+		
+				char day0=theDate[6];
+				char day1=theDate[7];
+				//int day=((int)day0-48)*10+((int)*day1-48);
+
+				//–ﬁ∏ƒ»’∆⁄∏Ò Ω
+				theDate[4]='-';
+				theDate[5]=month0;
+				theDate[6]=month1;
+				theDate[7]='-';
+				theDate.append(&day0);
+				theDate.append(&day1);
+				cout<<"theDate="<<theDate<<endl;
+			}
+			else
+			{
+				cout<<"»’∆⁄ ‰»Î∏Ò Ω”–ŒÛ"<<endl;
+				return;
+			}
+		}
+		else if(theDate.length()==10)
+		{
+			if(DateFormat2(theDate))
+			{
+				
+
+			} 
+			else
+			{
+				cout<<"»’∆⁄ ‰»Î∏Ò Ω”–ŒÛ"<<endl;
+				return;
+			}
+		}
+		else if(theDate.length()>10)
+		{
+			cout<<"»’∆⁄ ‰»Î∏Ò Ω”–ŒÛ"<<endl;
+			return;
+		}
 		ISBNNum=theISBNNum;
 		name=theName;
 		author=theAuthor;
 		pblsDate=theDate;
 
-		//ÂàùÂßãÂåñÊó∂ÈªòËÆ§Êú™ÂÄüÂá∫
+		//≥ı ºªØ ±ƒ¨»œŒ¥ΩË≥ˆ
 		isOut=false;
 	} 
 };
@@ -144,17 +273,17 @@ public:
  private:
 	 string name;
 	 string	cardNum;
-	 double oweCount;
+	 double oweCount;//«∑∑—∂‡…Ÿ‘™
  public:
 	 void DisplayInfo()
 	 {
-		 cout<<"ËØªËÄÖ‰ø°ÊÅØ------------------------------"<<endl;
-		 cout<<"ÂßìÂêç:\t\t"<<name<<endl;
-		 cout<<"Âõæ‰π¶Âç°Âè∑Ôºö\t"<<cardNum<<endl;
+		 cout<<"∂¡’ﬂ–≈œ¢------------------------------"<<endl;
+		 cout<<"–’√˚:\t\t"<<name<<endl;
+		 cout<<"Õº Èø®∫≈£∫\t"<<cardNum<<endl;
 		 if(IsOwed())
-			 cout<<"Ê¨†Ë¥π‰ø°ÊÅØÔºö\tÊ¨†Ë¥π"<<oweCount<<"ÂÖÉ"<<endl;
+			 cout<<"«∑∑—–≈œ¢£∫\t«∑∑—"<<oweCount<<"‘™"<<endl;
 		 else
-			 cout<<"Ê¨†Ë¥π‰ø°ÊÅØÔºö\tÊó†Ê¨†Ë¥πËÆ∞ÂΩï"<<endl;
+			 cout<<"«∑∑—–≈œ¢£∫\tŒﬁ«∑∑—º«¬º"<<endl;
 
 		 cout<<endl;
 	 }
@@ -176,7 +305,7 @@ public:
 		 if(count>0)
 			oweCount=count;
 		 else
-			 cout<<"ËæìÂÖ•ÊúâËØØÔºöÂÄüÈòÖË¥πÂøÖÈ°ªÊòØÊ≠£ÁöÑ"<<endl<<"Êìç‰ΩúÊú™ÂÆåÊàê"<<endl<<endl;
+			 cout<<" ‰»Î”–ŒÛ£∫ΩË‘ƒ∑—±ÿ–Î «’˝µƒ"<<endl<<"≤Ÿ◊˜Œ¥ÕÍ≥…"<<endl<<endl;
 	 }
 	 bool IsOwed()
 	 {
@@ -189,16 +318,16 @@ public:
 	 {
 	 }
 
-	 //ÊûÑÈÄ†ÂáΩÊï∞
+	 //ππ‘Ï∫Ø ˝
 	 Patron(string theName,string theCardNum)
 	 {
-		 //ËæìÂÖ•Ê≠£Á°ÆÊÄßÊ£ÄÊü•
+		 // ‰»Î’˝»∑–‘ºÏ≤È
 		 name=theName;
 		 cardNum=theCardNum;
 	 }
  };
 
- //Âõæ‰π¶È¶ÜÁ±ª
+ //Õº Èπ›¿‡
  class Library
  {
  private:
@@ -214,21 +343,21 @@ public:
 		}
 		void DisplayInfo()
 		{
-			cout<<"ÂÄüÈòÖ‰ø°ÊÅØ------------------------------"<<endl;
-			cout<<"Âõæ‰π¶‰ø°ÊÅØ----------------"<<endl;
-			cout<<"‰π¶ÂêçÔºö\t\t"<<inBook.GetName()<<endl;
-			cout<<"‰ΩúËÄÖÔºö\t\t"<<inBook.GetAuthor()<<endl;
-			cout<<"ISBNÂè∑Ôºö\t"<<inBook.GetISBNNum()<<endl;
-			cout<<"Âá∫ÁâàÊó•ÊúüÔºö\t"<<inBook.GetDat()<<endl;
+			cout<<"ΩË‘ƒ–≈œ¢------------------------------"<<endl;
+			cout<<"Õº È–≈œ¢----------------"<<endl;
+			cout<<" È√˚£∫\t\t"<<inBook.GetName()<<endl;
+			cout<<"◊˜’ﬂ£∫\t\t"<<inBook.GetAuthor()<<endl;
+			cout<<"ISBN∫≈£∫\t"<<inBook.GetISBNNum()<<endl;
+			cout<<"≥ˆ∞Ê»’∆⁄£∫\t"<<inBook.GetDat()<<endl;
 
-			cout<<"ËØªËÄÖ‰ø°ÊÅØ-----------------"<<endl;
-			cout<<"ÂßìÂêç:\t\t"<<inPatron.GetName()<<endl;
-			cout<<"Âõæ‰π¶Âç°Âè∑Ôºö\t"<<inPatron.GetCardNum()<<endl;
-			cout<<"ÂÄü‰π¶Êó•ÊúüÔºö\t"<<inDate.GetYear()<<"-"<<inDate.GetMonth()<<"-"<<inDate.GetDay()<<endl;
+			cout<<"∂¡’ﬂ–≈œ¢-----------------"<<endl;
+			cout<<"–’√˚:\t\t"<<inPatron.GetName()<<endl;
+			cout<<"Õº Èø®∫≈£∫\t"<<inPatron.GetCardNum()<<endl;
+			cout<<"ΩË È»’∆⁄£∫\t"<<inDate.GetYear()<<"-"<<inDate.GetMonth()<<"-"<<inDate.GetDay()<<endl;
 			if(inPatron.IsOwed())
-				cout<<"Ê¨†Ë¥π‰ø°ÊÅØÔºö\tÊ¨†Ë¥π"<<inPatron.GetOweCount()<<"ÂÖÉ"<<endl;
+				cout<<"«∑∑—–≈œ¢£∫\t«∑∑—"<<inPatron.GetOweCount()<<"‘™"<<endl;
 			else
-				cout<<"Ê¨†Ë¥π‰ø°ÊÅØÔºö\tÊó†Ê¨†Ë¥πËÆ∞ÂΩï"<<endl;
+				cout<<"«∑∑—–≈œ¢£∫\tŒﬁ«∑∑—º«¬º"<<endl;
 
 			cout<<endl;
 		}
@@ -239,99 +368,99 @@ public:
 	 vector<Patron>aPatron;
 	 vector<Transaction>aTransaction;
 	
-	 //Ê∑ªÂä†Âõæ‰π¶
+	 //ÃÌº”Õº È
 	 void AddBook(Book newBook)
 	 {
-		 cout<<"Êñ∞Êìç‰ΩúÔºö\tÂΩïÂÖ•Âõæ‰π¶‰ø°ÊÅØ"<<endl;
-		 cout<<"ÂáÜÂ§áÂ∞±Áª™..."<<endl;
+		 cout<<"–¬≤Ÿ◊˜£∫\t¬º»ÎÕº È–≈œ¢"<<endl;
+		 cout<<"◊º±∏æÕ–˜..."<<endl;
 
 		 if(newBook.GetName()=="")
 		 {
-			  cout<<"Âõæ‰π¶‰ø°ÊÅØËæìÂÖ•ÊúâËØØ"<<endl<<"Êìç‰ΩúÊú™ÂÆåÊàê"<<endl<<endl;
+			  cout<<"Õº È–≈œ¢ ‰»Î”–ŒÛ"<<endl<<"≤Ÿ◊˜Œ¥ÕÍ≥…"<<endl<<endl;
 			  return;
 		 }
 		 if(aBook.size()>0)
 			 for(int i=0;i<aBook.size();i++)
 				 if (aBook[i].GetName()==newBook.GetName())
 				 {
-					 cout<<"Âõæ‰π¶Â∑≤ÁªèÂ≠òÂú®"<<endl<<"Êìç‰ΩúÊú™ÂÆåÊàê"<<endl<<endl;
+					 cout<<"Õº È“—æ≠¥Ê‘⁄"<<endl<<"≤Ÿ◊˜Œ¥ÕÍ≥…"<<endl<<endl;
 					 return ;
 				 }
 		
-		//ÂΩïÂÖ•Âõæ‰π¶‰ø°ÊÅØ:
+		//¬º»ÎÕº È–≈œ¢:
 		
-		cout<<"Ê≠£Âú®ÂΩïÂÖ•Âõæ‰π¶‰ø°ÊÅØ..."<<endl;
+		cout<<"’˝‘⁄¬º»ÎÕº È–≈œ¢..."<<endl;
 		aBook.push_back(newBook);
-		cout<<"Êìç‰ΩúÂÆåÊàê!"<<endl<<endl;
+		cout<<"≤Ÿ◊˜ÕÍ≥…!"<<endl<<endl;
 		newBook.DisplayInfo();
 	 }
 
-	 //Ê∑ªÂä†ËØªËÄÖ
+	 //ÃÌº”∂¡’ﬂ
 	 void AddPatron(Patron newPatron )
 	 {
-		 cout<<"Êñ∞Êìç‰ΩúÔºö\tÂΩïÂÖ•ËØªËÄÖ‰ø°ÊÅØ"<<endl;
-		 cout<<"ÂáÜÂ§áÂ∞±Áª™..."<<endl;
+		 cout<<"–¬≤Ÿ◊˜£∫\t¬º»Î∂¡’ﬂ–≈œ¢"<<endl;
+		 cout<<"◊º±∏æÕ–˜..."<<endl;
 
 		 if(aPatron.size()>0)
 			 for(int i=0;i<aPatron.size();i++)
 				 if (aPatron[i].GetCardNum()==newPatron.GetCardNum())
 				 {
-					 cout<<"ËØªËÄÖÂ∑≤ÁªèÂ≠òÂú®"<<endl<<"Êìç‰ΩúÊú™ÂÆåÊàê"<<endl<<endl;
+					 cout<<"∂¡’ﬂ“—æ≠¥Ê‘⁄"<<endl<<"≤Ÿ◊˜Œ¥ÕÍ≥…"<<endl<<endl;
 					 return ;
 				 }
 		
-		cout<<"Ê≠£Âú®ÂΩïÂÖ•ËØªËÄÖ‰ø°ÊÅØ..."<<endl;
+		cout<<"’˝‘⁄¬º»Î∂¡’ﬂ–≈œ¢..."<<endl;
 		aPatron.push_back(newPatron);
-		cout<<"Êìç‰ΩúÂÆåÊàê!"<<endl<<endl;
+		cout<<"≤Ÿ◊˜ÕÍ≥…!"<<endl<<endl;
 		newPatron.DisplayInfo();
 		
 	 }
 
-	 //ÂÄüÂá∫Âõæ‰π¶
+	 //ΩË≥ˆÕº È
 	 void LendABookToPatron(Book existedBook,Patron existedPatron)
 	 {
 		 int bookOrder;
 		 int patronOrder;
 
-		 cout<<"Êñ∞Êìç‰ΩúÔºö\tÂÄüÂá∫Âõæ‰π¶"<<endl;
-		 cout<<"ÂáÜÂ§áÂ∞±Áª™..."<<endl;
+		 cout<<"–¬≤Ÿ◊˜£∫\tΩË≥ˆÕº È"<<endl;
+		 cout<<"◊º±∏æÕ–˜..."<<endl;
 
 		 if(aBook.size()==0)
 		 {
-			cout<<"Âõæ‰π¶È¶Ü‰∏≠Ê≤°Êúâ‰π¶"<<endl<<"Êìç‰ΩúÊú™ÂÆåÊàê"<<endl<<endl;
+			cout<<"Õº Èπ›÷–√ª”– È"<<endl<<"≤Ÿ◊˜Œ¥ÕÍ≥…"<<endl<<endl;
 			return;
 		 }
 		 else if(aPatron.size()==0)
 		 {
-			  cout<<"Â≠¶Áîü‰ø°ÊÅØÁ≥ªÁªü‰∏∫Á©∫"<<endl<<"Êìç‰ΩúÊú™ÂÆåÊàê"<<endl<<endl;
+			  cout<<"—ß…˙–≈œ¢œµÕ≥Œ™ø’"<<endl<<"≤Ÿ◊˜Œ¥ÕÍ≥…"<<endl<<endl;
 			  return;
 		 }
 			
-		 //Ê£ÄÊü•‰π¶ÂíåËØªËÄÖÊòØÂê¶Â≠òÂú® 
+		 //ºÏ≤È È∫Õ∂¡’ﬂ «∑Ò¥Ê‘⁄ 
 		 bool bookExist=false;
 		 for(int i=0;i<aBook.size();i++)
-			if(existedBook.GetISBNNum()==aBook[i].GetISBNNum())//‰π¶Â≠òÂú® Ê≥®ÊÑèÂà§Êñ≠Ê†áÂáÜÊó∂ISBNÂõ†‰∏∫‰π¶ÂèØËÉΩ‰ºöÈáçÂêç
+			if(existedBook.GetISBNNum()==aBook[i].GetISBNNum())// È¥Ê‘⁄ ◊¢“‚≈–∂œ±Í◊º «ISBN“ÚŒ™ Èø…ƒ‹ª·÷ÿ√˚
 			{
 				bookExist=true;
 				bookOrder=i;
 
-				//Ê£ÄÊü•‰π¶ÊòØÂê¶Â∑≤ÁªèÂÄüÂá∫
+				//ºÏ≤È È «∑Ò“—æ≠ΩË≥ˆ
 				if(aBook[bookOrder].GetIsOut())
 				{
-					cout<<"ËøôÊú¨‰π¶Â∑≤ÁªèË¢´ÂÄüÂá∫"<<endl<<"Êìç‰ΩúÊú™ÂÆåÊàê"<<endl<<endl;
+					cout<<"’‚±æ È“—æ≠±ªΩË≥ˆ"<<endl<<"≤Ÿ◊˜Œ¥ÕÍ≥…"<<endl<<endl;
 					break;
 				}
 				bool patronExist=false;
 				for(int i=0;i<aPatron.size();i++)
-					if(existedPatron.GetName()==aPatron[i].GetName())//ËØªËÄÖ‰ø°ÊÅØÂ≠òÂú®
+					if(existedPatron.GetName()==aPatron[i].GetName())//∂¡’ﬂ–≈œ¢¥Ê‘⁄
 					{
 						patronExist=true;
 						patronOrder=i;
 					
-						//Ê£ÄÊü•ÊòØÂê¶Ê¨†Ë¥π
+						//ºÏ≤È «∑Ò«∑∑—
 						if(aPatron[patronOrder].IsOwed())
 						{
-							cout<<"ËØªËÄÖÂ∑≤Ê¨†Ë¥πÔºåËØ∑Áº¥Ë¥πÂêéÂÜçÂÄü‰π¶"<<endl<<"Êìç‰ΩúÊú™ÂÆåÊàê"<<endl<<endl;
+							cout<<"∂¡’ﬂ“—«∑∑—£¨«ÎΩ…∑—∫Û‘ŸΩË È"<<endl<<"≤Ÿ◊˜Œ¥ÕÍ≥…"<<endl<<endl;
 							break;
 						}
 						else 
@@ -344,87 +473,270 @@ public:
 							newTransaction.inDate=aDate;
 							aTransaction.push_back(newTransaction);
 
-							cout<<"Ê≠£Âú®ÂΩïÂÖ•ÂÄüÈòÖ‰ø°ÊÅØ..."<<endl;
-							cout<<"Êìç‰ΩúÂÆåÊàê!"<<endl<<endl;
+							cout<<"’˝‘⁄¬º»ÎΩË‘ƒ–≈œ¢..."<<endl;
+							cout<<"≤Ÿ◊˜ÕÍ≥…!"<<endl<<endl;
 							newTransaction.DisplayInfo();
 						}
 					}
 				if (!patronExist)
 				{
-					cout<<"Á≥ªÁªü‰∏≠Ê≤°ÊúâËØ•Áî®Êà∑ÔºåËØ∑ÂÖàÂΩïÂÖ•"<<endl<<"Êìç‰ΩúÊú™ÂÆåÊàê"<<endl<<endl;
+					cout<<"œµÕ≥÷–√ª”–∏√”√ªß£¨«Îœ»¬º»Î"<<endl<<"≤Ÿ◊˜Œ¥ÕÍ≥…"<<endl<<endl;
 				}
 			}
 			if (!bookExist)
 			{
-				cout<<"Á≥ªÁªü‰∏≠ÊöÇÊó∂Ê≤°ÊúâËøôÊú¨‰π¶"<<endl<<"Êìç‰ΩúÊú™ÂÆåÊàê"<<endl<<endl;			
+				cout<<"œµÕ≥÷–‘› ±√ª”–’‚±æ È"<<endl<<"≤Ÿ◊˜Œ¥ÕÍ≥…"<<endl<<endl;			
 			}
 	 }
 	
-	 //ÊòæÁ§∫Ê¨†Ë¥π‰ø°ÊÅØ
+	 //œ‘ æ«∑∑—–≈œ¢
 	 void GetOwedInfo()
 	 {
-		 cout<<"Êñ∞Êìç‰ΩúÔºö\tÊòæÁ§∫Ê¨†Ë¥πÂêçÂçï"<<endl;
-		 cout<<"ÂáÜÂ§áÂ∞±Áª™..."<<endl;
-		cout<<"Ê≠£Âú®ËøõË°åÊìç‰Ωú..."<<endl;
-		cout<<"Êìç‰ΩúÂÆåÊàêÔºåÊ¨†Ë¥π‰ø°ÊÅØÂ¶Ç‰∏ã"<<endl;
-		cout<<"ÂßìÂêç\tÂõæ‰π¶ËØÅÂè∑\tÊ¨†Ë¥πÈáëÈ¢ù"<<endl;
+		cout<<"–¬≤Ÿ◊˜£∫\tœ‘ æ«∑∑—√˚µ•"<<endl;
+		cout<<"◊º±∏æÕ–˜..."<<endl;
+		cout<<"’˝‘⁄Ω¯––≤Ÿ◊˜..."<<endl;
+		cout<<"≤Ÿ◊˜ÕÍ≥…£¨«∑∑—–≈œ¢»Áœ¬"<<endl;
+		cout<<"–’√˚\tÕº È÷§∫≈\t«∑∑—Ω∂Ó"<<endl;
 		for(int i=0;i<aPatron.size();i++)
 			if(aPatron[i].IsOwed())
-				cout<<aPatron[i].GetName()<<"\t"<<aPatron[i].GetCardNum()<<"\t"<<aPatron[i].GetOweCount()<<"ÂÖÉ"<<endl;
+				cout<<aPatron[i].GetName()<<"\t"<<aPatron[i].GetCardNum()<<"\t"<<aPatron[i].GetOweCount()<<"‘™"<<endl;
+	 }
+	 //πÈªπÕº È
+	 void ReturnBook(Book reBook,Patron rePatron)
+	 {
+		 bool bookExisted=false;
+		 bool patronExisted=false;
+		 bool transactionExisted=false;
+		 int bookOrder=0;
+		 int patronOrder=0;
+		 int transactionOrder=0;
+
+		 cout<<"–¬≤Ÿ◊˜£∫\tπÈªπÕº È"<<endl;
+		 cout<<"◊º±∏æÕ–˜..."<<endl;
+		 cout<<"’˝‘⁄Ω¯––≤Ÿ◊˜..."<<endl;
+
+		 //ºÏ≤ÈÕº È «∑Ò¥Ê‘⁄
+		 for(int i=0;i<aBook.size();i++)
+			 if(reBook.GetISBNNum()==aBook[i].GetISBNNum())
+			 {
+				 bookExisted=true;
+				 bookOrder=i;
+			 }
+		 if(!bookExisted)
+		 {
+			 cout<<"Œﬁµ±«∞Õº È–≈œ¢£¨«Îœ»¬º»Î"<<endl;
+			 return;
+		 }
+
+		 //ºÏ≤È∂¡’ﬂ «∑Ò¥Ê‘⁄
+		 for(int i=0;i<aPatron.size();i++)
+			 if(rePatron.GetCardNum()==aPatron[i].GetCardNum())
+			 {
+				 patronExisted=true;
+				 patronOrder=i;
+			 }
+		 if(!patronExisted)
+		 {
+			 cout<<"Œﬁµ±«∞∂¡’ﬂ–≈œ¢£¨«Îœ»¬º»Î"<<endl;
+			 return;
+		 }
+
+		 //≈–∂œ∏√Transaction «∑Ò¥Ê‘⁄
+		 for(int i=0;i<aTransaction.size();i++)
+			 if(aTransaction[i].inBook.GetISBNNum()==reBook.GetISBNNum() && aTransaction[i].inPatron.GetCardNum()==rePatron.GetCardNum())
+				{
+					transactionExisted=true;
+					transactionOrder=i;
+				}
+		if(!transactionExisted)
+		{
+				cout<<"ΩË Èº«¬º÷–Œﬁ¥ÀÃıº«¬º£¨«Î◊–œ∏∫À∂‘ È√˚∫Õ∂¡’ﬂ–’√˚∫Û‘ŸÃ·Ωª"<<endl;
+				return;
+		}
+
+		 //–ﬁ∏ƒÕº ÈµƒΩË≥ˆÃÿ–‘
+		 aBook[bookOrder].ReturnIn();
+
+		 //–ﬁ∏ƒTransactionœÚ¡ø
+		 //vector <Transaction>::iterator iter;
+		 //iter=aTransaction.begin();
+		 aTransaction.erase(aTransaction.begin()+transactionOrder);
+
+
+
+
+
+		 
+		 cout<<"≤Ÿ◊˜ÕÍ≥…£¨±æ¥Œ≤Ÿ◊˜–≈œ¢»Áœ¬"<<endl;
+		 cout<<"-----πÈªπÕº È–≈œ¢»Áœ¬-----"<<endl;
+		 cout<<"----ªπ È’ﬂ–≈œ¢-----"<<endl;
+		 cout<<"–’√˚£∫\t"<<rePatron.GetName()<<"∂¡’ﬂ÷§∫≈£∫\t"<<rePatron.GetCardNum()<<endl;
+		 cout<<"-----πÈªπÕº È–≈œ¢----"<<endl;
+		 cout<<" È√˚:\t"<<reBook.GetName()<<"Õº È◊˜’ﬂ:\t"<<reBook.GetAuthor()<<endl;
+		 
+	 }
+	 //œ‘ æΩË È¡–±Ì
+	 void DisplayOut()
+	 {
+		
+		 cout<<endl;
+		 cout<<"–¬≤Ÿ◊˜£∫\tœ‘ æΩË≥ˆ È¡–±Ì"<<endl;
+		 cout<<"◊º±∏æÕ–˜..."<<endl;
+		 cout<<"’˝‘⁄Ω¯––≤Ÿ◊˜..."<<endl;
+		 cout<<"≤Ÿ◊˜ÕÍ≥…£¨±æ¥Œ≤Ÿ◊˜–≈œ¢»Áœ¬"<<endl;
+		 cout<<"----------ΩË≥ˆÕº È¡–±Ì----------\n";
+		 if(aBook.size()==0)
+			 cout<<"µ±«∞√ª”–Õº ÈΩË≥ˆ"<<endl;
+		 else
+		 {
+			int orders=0;
+			for (int i=0;i<aBook.size();i++)
+				if (aBook[i].GetIsOut())
+				{
+					orders++;
+					cout<<"–Ú¡–∫≈£∫"<<orders<<"\t È√˚\t"<<aBook[i].GetName()<<endl;
+				}
+		 }
 	 }
 	 Library(){}
  };
  int main()
  {
 	 string keep;
+	 bool run=true;
+	 int bookOrder=0;
 
-	///*Âõæ‰π¶
-	 //1.1ÂàùÂßãÂåñÂõæ‰π¶‰ø°ÊÅØ
-	 Book newBook1= Book("122s","Èù¢ÂêëÂØπË±°ÊäÄÊúØ","ÊûóÂÖ∏Èπè","2013-09-12");		//right
-	 Book newBook2= Book("132s","Èù¢ÂêëÂØπË±°ÊäÄÊúØ","ÊûóÂÖ∏Èπè","2013-09-12");		//wrong
-	 //1,2ËøîÂõûÂõæ‰π¶‰ø°ÊÅØ
+	 Library ustcLibrary=Library();
+	 while(run)
+	 {
+		 cout<<"-------------------÷˜≤Àµ•---------------------\n";
+		cout<<"0.ÕÀ≥ˆ\t1.ÃÌº”\t2.≤È—Ø\t3.ΩË È\t4.ªπ È\t5.∑—”√\n";
+		cout<<"«Î—°‘Ò≤Ÿ◊˜£∫\n";
+
+		int  mainOperator=0;
+		cin>>mainOperator;
+	
+		switch(mainOperator)
+		{
+		case 0:
+			run=false;
+			break;
+		case 1:
+			cout<<"------------ÃÌº”◊”≤Àµ•------------\n";
+			cout<<"0.∑µªÿ\t1.ÃÌº”Õº È\t2.ÃÌº”∂¡’ﬂ\n";
+			cout<<"«Î—°‘Ò≤Ÿ◊˜£∫\n";
+
+			int addOperator=0;
+			cin>>addOperator;
+
+			switch(addOperator)
+			{
+			case 0:
+				break;
+			case 1:
+				
+				bookOrder=2;
+
+				string strISBN;
+				string strName;
+				string strAuthor;
+				string strPulishedDate;
+				string getId;
+				string getName;
+				string getAuthor;
+				string getPublishedDate;
+				cout<<"----------ÃÌº”Õº È----------\n";
+				cout<<"«Î“¿¥Œ ‰»ÎÕº ÈµƒISBN¬Î£¨ È√˚£¨◊˜’ﬂ∫Õ≥ˆ∞Ê»’∆⁄£∫\n";
+				cin>>strISBN>>strName>>strAuthor>>strPulishedDate;
+
+				Book  newBook=Book(strISBN,strName,strAuthor,strPulishedDate);
+				getId=newBook.GetISBNNum();
+				bool wrongOnce=false;
+				while(getId=="") 
+				{
+					wrongOnce=true;
+					cout<<"«Î÷ÿ–¬ ‰»Î:\n";
+					cin>>strISBN>>strName>>strAuthor>>strPulishedDate;
+					Book newBook=Book(strISBN,strName,strAuthor,strPulishedDate);
+					getId=newBook.GetISBNNum();
+					getName=newBook.GetName();
+					getAuthor=newBook.GetAuthor();
+					getPublishedDate=newBook.GetDat();
+				}
+				if(wrongOnce)
+				{
+					Book rightBook=Book(getId,getName,getAuthor,getPublishedDate);
+					ustcLibrary.AddBook(rightBook);
+				}
+				else
+				{
+					ustcLibrary.AddBook(newBook);
+				}
+				
+
+			}
+
+			break;
+		}
+	 }
+	
+
+	
+	/*Õº È
+	 //1.1≥ı ºªØÕº È–≈œ¢
+	 Book newBook1= Book("1-2-2-s","√ÊœÚ∂‘œÛºº ı1","¡÷µ‰≈Ù","2013-09-12");		//right
+	 Book newBook2= Book("1-3-s-s","√ÊœÚ∂‘œÛºº ı2","∫˙œ£Õ˚ƒ‹","2013-09-12");		//wrong
+	 Book newBook3=Book("1-2-3-w","C++ program","Jhon Tom","2012-10-19");
+	 //1,2∑µªÿÕº È–≈œ¢
 	 cout<< newBook1.GetAuthor()<<endl;
 	 cout<<newBook1.GetDat()<<endl;
 	 cout<<newBook1.GetISBNNum()<<endl;
 	 cout<<newBook1.GetIsOut()<<endl;
 	 cout<<newBook1.GetName()<<endl;
-	 newBook1.DisplayInfo();	//ÊÄª‰ΩìÊòæÁ§∫‰ø°ÊÅØ
- //*/
+	 newBook1.DisplayInfo();	//◊‹ÃÂœ‘ æ–≈œ¢
+// 
 
 
- ///*ËØªËÄÖ
-	 //2.1ÂàùÂßãÂåñËØªËÄÖ‰ø°ÊÅØ
-	 Patron linPatron =Patron("ÊûóÂºò‰ºü","PB11210245");
-	 Patron wangPatron=Patron("Áéã‰∫ëÂ≥∞","PB11210234");
-	 Patron liPatron=Patron("ÊùéÊïè","SA11023234");
-	 //2.2ÊòæÁ§∫ËØªËÄÖ‰ø°ÊÅØ
+ ///*∂¡’ﬂ
+	 //2.1≥ı ºªØ∂¡’ﬂ–≈œ¢
+	 Patron linPatron =Patron("¡÷∫ÎŒ∞","PB11210245");
+	 Patron wangPatron=Patron("Õı‘∆∑Â","PB11210234");
+	 Patron liPatron=Patron("¿Ó√Ù","SA11023234");
+	 Patron xPatron=Patron("XJhon","PB12210345");
+	 //2.2œ‘ æ∂¡’ﬂ–≈œ¢
 	 linPatron.DisplayInfo();
 	 wangPatron.DisplayInfo();
 	 liPatron.DisplayInfo();
-	 //2.3ËÆæÂÆöÂÄü‰π¶Ë¥π
+	 //2.3…Ë∂®ΩË È∑—
 	 linPatron.SetOweCount(23.4);
-	 //2.4ÊòæÁ§∫ÊòØÂê¶Ê¨†Ë¥π
+	 //2.4œ‘ æ «∑Ò«∑∑—
 	 linPatron.IsOwed();
 	 linPatron.DisplayInfo();
-// */
+// 
 
-//  /*Âõæ‰π¶È¶Ü
-	 //3.1Êñ∞Âª∫Âõæ‰π¶È¶Ü
+ ///*Õº Èπ›
+	 //3.1–¬Ω®Õº Èπ›
 	 Library ustcLibrary=Library();
-	 //3.2Ê∑ªÂä†Âõæ‰π¶
+	 //3.2ÃÌº”Õº È
 	 ustcLibrary.AddBook(newBook1);					//right
 	 ustcLibrary.AddBook(newBook2);					//wrong
-	 //3.3Ê∑ªÂä†ËØªËÄÖ
+	 ustcLibrary.AddBook(newBook3);
+	 //3.3ÃÌº”∂¡’ﬂ
 	 ustcLibrary.AddPatron(linPatron);
 	 ustcLibrary.AddPatron(wangPatron);
-	 //3.4ÂÄü‰π¶
-	 ustcLibrary.LendABookToPatron(newBook1,wangPatron);		//Ê¨†Ë¥π
-	 ustcLibrary.LendABookToPatron(newBook1,wangPatron);	//Êú™Ê¨†Ë¥π
-	// ustcLibrary.LendABookToPatron(newBook1,liPatron);		//Â∑≤ÁªèÂÄüÂá∫
-	 //3.5ÊòæÁ§∫Ê¨†Ë¥πËØªËÄÖÂàóË°®
+	 ustcLibrary.AddPatron(xPatron);
+	 //3.4ΩË È
+	 ustcLibrary.LendABookToPatron(newBook1,wangPatron);		//«∑∑—
+	 ustcLibrary.LendABookToPatron(newBook1,wangPatron);	//Œ¥«∑∑—
+	 ustcLibrary.LendABookToPatron(newBook3,xPatron);
+	// ustcLibrary.LendABookToPatron(newBook1,liPatron);		//“—æ≠ΩË≥ˆ
+	 //3.5œ‘ æ«∑∑—∂¡’ﬂ¡–±Ì
 	 ustcLibrary.GetOwedInfo();
-// */
+	 ustcLibrary.DisplayOut();
+	 ustcLibrary.ReturnBook(newBook1,wangPatron);
+	 ustcLibrary.DisplayOut();
+//*/
 
-	 cin>>keep;
+	// cin>>keep;
  }
 
