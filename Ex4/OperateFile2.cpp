@@ -56,7 +56,7 @@ vector<string> SortWord(vector<string> file)//字符串列表排序
 	{
 		for (int j=i+1;j<file.size() &&file[j]!="";j++)
 		{
-			if (CompareWord(file[i],file[j],0))//a>b
+			if (file[i]>file[j])//a>b
 			{
 				temp=file[i];
 				file[i]=file[j];
@@ -74,8 +74,9 @@ int main()
 
 	vector<string>orderFile1;
 	vector<string>orderFile2;
-	fstream  file1("a.txt");
-	fstream  file2("b.txt");
+	fstream  file1("d://a.txt");//默认是ios::in，如果不存在，则ios::ate和ios::app都失败,以后打开也用该形式
+	fstream  file2("d://电子书/b.txt");
+	fstream  file3("d://电子书/c.txt",ios::app|ios::out);//如果存在，则在尾部追加 如果不存在，则新建该文件
 
 	for (int i=0;i<file1.left;i++)
 	{
@@ -99,24 +100,23 @@ int main()
 			else
 				existed=false;
 			break;
-		}
-		
+		}	
 	}
 	file1.close();
 
 	//将a.txt清零。或许有可以直接使用的函数？？
-	file1.open("a.txt");
+	file1.open("d://a.txt");
 	for (int i=0;i<25;i++)
 		file1<<"       ";
 	file1.close();
 
-	file1.open("a.txt");
-
+	//往文件1中写有序的单词
+	file1.open("d://a.txt");
 	orderFile1=SortWord(orderFile1);
-
 	for (int i=0;i<orderFile1.size();i++)//将有序且无重复的单词写入文件中
 		file1<<orderFile1[i]<<" ";
-	
+	file1.close();
+
 	//对文件1的操作结束，初始化buffer和existed
 	buffer="";
 	existed=false;
@@ -149,47 +149,43 @@ int main()
 
 	}
 	file2.close();
-	file2.open("b.txt");
+	file2.open("d://电子书/b.txt");
 	for (int i=0;i<25;i++)
 	{
 		file2<<"       ";
 	}
 	file2.close();
-	file2.open("b.txt");
 
+	//将排列有序的单词放入文件2
+	file2.open("d://电子书/b.txt");
 	orderFile2=SortWord(orderFile2);
-
 	for (int i=0;i<orderFile2.size();i++)
 		file2<<orderFile2[i]<<" ";
 
+	//消除文件1和文件2中重复的单词
 	for (int i=0;i<orderFile2.size();i++)
 	{
 		bool alreadyin=false;
 		for (int j=0;j<orderFile1.size();j++)
 			if(orderFile2[i]==orderFile1[j])
 				alreadyin=true;
+
 		if (!alreadyin)
 			orderFile1.push_back(orderFile2[i]);
 		else
 			alreadyin=false;
 	}
 
-	file1.close();
 
-	file1.open("a.txt");
-	for (int i=0;i<25;i++)
-		file1<<"       ";
-	file1.close();
-
-	file1.open("a.txt");
+	//对文件3进行操作
 	orderFile1=SortWord(orderFile1);
-
 	for (int i=0;i<orderFile1.size();i++)
-		file1<<orderFile1[i]<<" ";
+		file3<<orderFile1[i]<<" ";
 
-	file1.close();
 	file2.close();
-	
+	file3.close();
+
+	cout<<"操作完成\n";
 	string keep= " ";
 	cin>>keep;
 }
